@@ -1,0 +1,135 @@
+<head>
+	<title>Knit Plotter</title>
+	<link rel="icon" type="image/png" href="images/favicon.png">
+	
+	<link href="style.css" rel="stylesheet" type="text/css"/>
+	
+	<script src="jquery-3.2.1.min.js" type="text/javascript"></script>
+	<script src="jscolor.js"></script>
+	<script src="main.js" type="text/javascript"></script>
+</head>
+
+<body>
+
+	<div id="pageWrapper">
+		<div id="headercontainer">
+			<a href="index.html">Knit Plotter</a>
+			&nbsp
+			<a href="about.html">About</a>
+		</div>
+		<div id="topcontainer">
+		
+			<div id="toolbar">
+			
+			<div id="toolbuttonbar">
+				
+				<div id="menuoptionbar">
+				
+					<button onclick=toggleColourBar() class="toolbarbutton">Colours</br><img src="images/icons/dropmenu.svg" class="toolbarbuttonicon"></img></button>
+					<button onclick=toggleSizeBar() class="toolbarbutton">Grid Size</br><img src="images/icons/dropmenu.svg" class="toolbarbuttonicon"></img></button>
+					<button onclick=toggleGaugeBar() class="toolbarbutton">Gauges</br><img src="images/icons/dropmenu.svg" class="toolbarbuttonicon"></img></button>
+				
+				</div>
+				
+				<div id="actionoptionbar">
+					<button onclick=toggleRepeat() class="actiontoolbarbutton">Repeat </br><img src="images/icons/repeat.svg" class="toolbarbuttonicon"></img></button>
+					<button onclick=toggleDisplay() class="actiontoolbarbutton">Display Style </br><img src="images/icons/style.svg" class="toolbarbuttonicon"></img></button>
+					<button onclick=toggleMonochrome() id="monochromebutton" class="actiontoolbarbutton">Black and White </br><img src="images/icons/monochrome.svg" class="toolbarbuttonicon"></img></button>
+					
+					<button onclick=downloadImage() id="downloadbutton" class="actiontoolbarbutton">Download </br><img src="images/icons/download.svg" class="toolbarbuttonicon"></img></button>
+					<button onclick=printImage() class="actiontoolbarbutton">Print </br><img src="images/icons/print.svg" class="toolbarbuttonicon"></img></button>
+				</div>
+			
+			</div>
+			
+			<div id="dropcontainer">
+			
+				<div id="colourbar" class="dropmenu">
+					<div id="coloureditbar">
+						<button
+						class="jscolor {valueElement:null,value:colourValues[0], onFineChange:'setColourValue(0, this.toString())'}"
+						style="width:50px; height:20px;">
+						</button>
+						<button
+						class="jscolor {valueElement:null,value:colourValues[1], onFineChange:'setColourValue(1, this.toString())'}"
+						style="width:50px; height:20px;">
+						</button>
+					</div>
+					<div id="colouraddbar">
+						<button onclick="addColour('default')" id="colouraddbutton">Add Colour <b>+</b></button>
+					</div>
+				</div>
+				
+				<div id=sizebar class="dropmenu">
+				Add and remove columns, rows:
+				</br>
+				<button onclick="changeGridWidth(1, false)" class="adjustbutton">+ <img src="images/icons/manipleft.png" class="toolbarbuttonicon"></img></button>
+				<button onclick="changeGridWidth(-1, false)" class="adjustbutton">- <img src="images/icons/manipleft.png" class="toolbarbuttonicon"></img></button>
+				&nbsp&nbsp
+				<button onclick="changeGridWidth(1, true)" class="adjustbutton">+ <img src="images/icons/manipright.png" class="toolbarbuttonicon"></img></button>
+				<button onclick="changeGridWidth(-1, true)" class="adjustbutton">- <img src="images/icons/manipright.png" class="toolbarbuttonicon"></img></button>
+				</br>
+				<button onclick="changeGridHeight(1, false)" class="adjustbutton">+ <img src="images/icons/manipup.png" class="toolbarbuttonicon"></img></button>
+				<button onclick="changeGridHeight(-1, false)" class="adjustbutton">- <img src="images/icons/manipup.png" class="toolbarbuttonicon"></img></button>
+				&nbsp&nbsp
+				<button onclick="changeGridHeight(1, true)" class="adjustbutton">+ <img src="images/icons/manipdown.png" class="toolbarbuttonicon"></img></button>
+				<button onclick="changeGridHeight(-1, true)" class="adjustbutton">- <img src="images/icons/manipdown.png" class="toolbarbuttonicon"></img></button>
+				</div>
+				
+				<div id=gaugebar class="dropmenu">
+				Adjust grid display gauge
+				</br>
+				<button onclick=changeWidthGauge(5) class="adjustbutton">+ <img src="images/icons/gaugeexpandhorizontal.svg" class="horizontaltoolbarbuttonicon"></img></button>
+				<button onclick=changeWidthGauge(-5) class="adjustbutton">- <img src="images/icons/gaugeshrinkhorizontal.svg" class="horizontaltoolbarbuttonicon"></img></button>
+				<button onclick=changeRowGauge(5) class="adjustbutton">+ <img src="images/icons/gaugeexpandvertical.svg" class="verticaltoolbarbuttonicon"></img></button>
+				<button onclick=changeRowGauge(-5) class="adjustbutton">- <img src="images/icons/gaugeshrinkvertical.svg" class="verticaltoolbarbuttonicon"></img></button>
+				</div>
+				
+			</div>
+			
+			</div>
+		
+		</div>
+		
+		<div id="middlecontainer">
+		
+			<div id="sidebar">
+			
+				<div id="cursortoolbar">
+					<button onclick="setCursorDragMode(false)" id="activecursorbrushbutton" class="cursortoolbutton"></button>
+					<button onclick="setCursorDragMode(true)" id="cursordragbutton" class="cursortoolbutton"></button>
+					
+				</div>
+				
+				<div id="editortoolbar">
+					<button onclick="changeZoom(0.75)" id="zoomoutbutton" class="cursortoolbutton"></button>
+					<button onclick="changeZoom(1.334)" id="zoominbutton" class="cursortoolbutton"></button>
+				</div>
+				
+				Colours:
+				<div id="colourpalette">
+				
+				</div>
+				
+					
+			</div>
+			
+			<div id="holder">
+
+				<canvas id="drawboard" width="520px" height="520px" style="background: #ffffff;     magrin:20px;"></canvas>
+			
+
+			</div>
+			
+			
+		
+		</div>
+		
+		<!--<div id="footer">
+		Made in 2017
+		</div>-->
+	</div>
+	
+	
+
+</body>
